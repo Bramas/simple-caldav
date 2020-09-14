@@ -263,6 +263,11 @@ class SimpleCalDAV {
     finalEvent.alarms = valarms;
 
     const pevent = new ICAL.Event(evt);
+    const rrule = evt.jCal[1].filter(l => l.includes('rrule'))
+    if(rrule.length > 0)
+    {
+      finalEvent.rrule=rrule[0][3]
+    }
     finalEvent.summary = pevent.summary;
     finalEvent.start = pevent.startDate.toJSDate();
     finalEvent.end = pevent.endDate.toJSDate();
